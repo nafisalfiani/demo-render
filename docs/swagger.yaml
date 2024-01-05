@@ -1,4 +1,74 @@
+definitions:
+  entity.HttpResp:
+    properties:
+      data: {}
+      error:
+        type: string
+      message:
+        type: string
+      status:
+        type: integer
+    type: object
+  entity.LoginResponse:
+    properties:
+      message:
+        type: string
+      token:
+        type: string
+    type: object
+  entity.RegisterResponse:
+    properties:
+      message:
+        type: string
+      user:
+        $ref: '#/definitions/entity.User'
+    type: object
+  entity.User:
+    properties:
+      deposit_amount:
+        type: number
+      password:
+        type: string
+      user_id:
+        type: integer
+      username:
+        type: string
+    required:
+    - deposit_amount
+    - password
+    - username
+    type: object
 info:
-  contact: {}
-paths: {}
+  contact:
+    email: nafisa.alfiani.ica@gmail.com
+    name: Nafisa Alfiani
+paths:
+  /users/register:
+    post:
+      consumes:
+      - application/json
+      description: Allow existing user to login to avengers commerce system
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/entity.HttpResp'
+            - properties:
+                data:
+                  $ref: '#/definitions/entity.LoginResponse'
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/entity.HttpResp'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/entity.HttpResp'
+      summary: Login existing user
+      tags:
+      - users
 swagger: "2.0"

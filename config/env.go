@@ -35,6 +35,11 @@ func InitEnv() (*Value, error) {
 		return nil, err
 	}
 
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "10000"
+	}
+
 	return &Value{
 		Database: Database{
 			DbUrl:      os.Getenv("DB_URL"),
@@ -45,7 +50,7 @@ func InitEnv() (*Value, error) {
 		},
 		Server: Server{
 			Base: "",
-			Port: os.Getenv("PORT"),
+			Port: port,
 		},
 		Auth: Auth{
 			SecretKey: os.Getenv("AUTH_SECRETKEY"),

@@ -8,6 +8,7 @@ import (
 	"avengers-commerce/repository"
 	"fmt"
 	"log"
+	"os"
 
 	"github.com/go-playground/validator/v10"
 	"github.com/labstack/echo/v4"
@@ -57,6 +58,8 @@ func main() {
 
 	e.GET("/transactions", handler.ListTransaction, handler.Authorize)
 	e.POST("/transactions", handler.CreateTransaction, handler.Authorize)
+
+	log.Printf("Preparing render deployment with port: %v[env], %v[os]\n", cfg.Server.Port, os.Getenv("PORT"))
 
 	e.Logger.Fatal(e.Start(fmt.Sprintf(":%v", cfg.Server.Port)))
 }
