@@ -32,7 +32,7 @@ func Init(config *config.Value, repo *repository.Repository, validator *validato
 }
 
 func (h *Handler) Ping(c echo.Context) error {
-	httpSuccess(c, http.StatusOK, "PONG!")
+	return httpSuccess(c, http.StatusOK, "PONG!")
 }
 
 // httpError is helper function for error response
