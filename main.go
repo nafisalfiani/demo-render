@@ -47,6 +47,8 @@ func main() {
 	docs.SwaggerInfo.Host = fmt.Sprintf("%s:%s", cfg.Server.Base, cfg.Server.Port)
 	e.GET("/swagger/*", echoSwagger.EchoWrapHandler())
 
+	e.GET("/ping", handler.Ping)
+
 	u := e.Group("/users")
 	u.POST("/register", handler.Register)
 	u.POST("/login", handler.Login)
