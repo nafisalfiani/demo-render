@@ -58,5 +58,5 @@ func main() {
 	e.GET("/transactions", handler.ListTransaction, handler.Authorize)
 	e.POST("/transactions", handler.CreateTransaction, handler.Authorize)
 
-	e.Logger.Fatal(e.Start(cfg.Server.Port))
+	e.Logger.Fatal(e.Start(fmt.Sprintf(":%v", cfg.Server.Port)))
 }
